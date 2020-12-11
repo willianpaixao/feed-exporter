@@ -1,0 +1,12 @@
+groups:
+- name: example
+  rules:
+
+  - alert: submission threshold
+    expr: submission_received / on (round) group_left answer_updated * 100 > 130
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Submission deviation threshold"
+      description: "Submission from oracle {{ $labels.oracle }} at th round {{ $labels.round }} is 30% higher than accepted answer"
